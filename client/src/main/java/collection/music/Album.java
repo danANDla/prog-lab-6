@@ -1,6 +1,8 @@
 package collection.music;
 
-public class Album {
+import java.io.Serializable;
+
+public class Album implements Serializable {
     private String name; //Поле не может быть null, Строка не может быть пустой
     private int tracks; //Значение поля должно быть больше 0
     private Integer length; //Поле может быть null, Значение поля должно быть больше 0

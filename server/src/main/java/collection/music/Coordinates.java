@@ -1,6 +1,8 @@
 package collection.music;
 
-public class Coordinates {
+import java.io.Serializable;
+
+public class Coordinates implements Serializable {
     private Double x; //Поле не может быть null
     private Integer y; //Значение поля должно быть больше -620, Поле не может быть null
 

@@ -43,6 +43,7 @@ public class CommandsManager {
         localComandsList.put("history", new History(history, io));
 
         commandsList.put("info", new Info());
+        commandsList.put("add", new Add(musicBandFactory));
     }
 
     public void executeCommand(String newCommand){

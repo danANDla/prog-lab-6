@@ -18,6 +18,7 @@ public class UDPserver {
 
     // Серверный UDP-сокет запущен на этом порту
     private final static int SERVICE_PORT=50001;
+    private final static int BUFFER_SIZE=1000;
 
     private ByteBuffer buffer;
 
@@ -26,7 +27,7 @@ public class UDPserver {
         try{
             datagramChannel = DatagramChannel.open();
             datagramChannel.bind(new InetSocketAddress(SERVICE_PORT));
-            buffer = ByteBuffer.allocate(150);
+            buffer = ByteBuffer.allocate(BUFFER_SIZE);
             buffer.clear();
         } catch (SocketException e){
             io.printError("Unable to create server socket");

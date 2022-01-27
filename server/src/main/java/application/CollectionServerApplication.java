@@ -1,7 +1,7 @@
 package application;
 
-import udpserver.Request;
-import udpserver.UDPserver;
+import udp.Request;
+import udp.UDPserver;
 import commands.CommandsManager;
 import services.IOutil;
 

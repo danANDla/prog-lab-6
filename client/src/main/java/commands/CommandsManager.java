@@ -6,8 +6,8 @@ import commands.interfaces.LocalCommand;
 import commands.interfaces.RemoteArgumentedCommand;
 import commands.interfaces.RemoteCommand;
 import services.IOutil;
-import udpclient.Request;
-import udpclient.UDPclient;
+import udp.Request;
+import udp.UDPclient;
 
 import java.util.ArrayDeque;
 import java.util.HashMap;

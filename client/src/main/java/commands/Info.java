@@ -1,7 +1,7 @@
 package commands;
 
 import commands.interfaces.RemoteCommand;
-import udpclient.Request;
+import udp.Request;
 
 public class Info implements RemoteCommand {
     @Override

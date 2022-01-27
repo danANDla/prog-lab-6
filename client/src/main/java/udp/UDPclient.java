@@ -1,4 +1,4 @@
-package udpclient;
+package udp;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;

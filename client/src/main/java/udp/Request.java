@@ -1,4 +1,4 @@
-package udpserver;
+package udp;
 
 import collection.music.MusicBand;
 
@@ -40,5 +40,14 @@ public class Request implements Serializable {
 
     public void setMusicBand(MusicBand musicBand) {
         this.musicBand = musicBand;
+    }
+
+    @Override
+    public String toString() {
+        return "Request{" +
+                "command='" + command + '\'' +
+                ", args='" + args + '\'' +
+                ", musicBand=" + musicBand +
+                '}';
     }
 }

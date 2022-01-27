@@ -6,6 +6,8 @@ import commands.interfaces.LocalCommand;
 import commands.interfaces.RemoteArgumentedCommand;
 import commands.interfaces.RemoteCommand;
 import services.IOutil;
+import udpclient.Request;
+import udpclient.UDPclient;
 
 import java.util.ArrayDeque;
 import java.util.HashMap;
@@ -18,6 +20,7 @@ public class CommandsManager {
     private IOutil io;
     private MusicBandFactory musicBandFactory;
     private Asker asker;
+    private UDPclient udp;
 
     ArrayDeque<String> history;
 
@@ -26,6 +29,7 @@ public class CommandsManager {
         asker = new Asker(io);
         musicBandFactory = new MusicBandFactory(asker);
         history = new ArrayDeque<String>();
+        udp = new UDPclient();
         fillLists();
     }
 
@@ -38,6 +42,7 @@ public class CommandsManager {
         localComandsList.put("help", new Help(commandsList, localComandsList, argumentedComandsList, io));
         localComandsList.put("history", new History(history, io));
 
+        commandsList.put("info", new Info());
     }
 
     public void executeCommand(String newCommand){
@@ -70,7 +75,8 @@ public class CommandsManager {
         else if(commandsList.containsKey(command[0])){
             RemoteCommand parsedCommand = commandsList.get(command[0]);
 
-            //TODO add command package and send
+            Request newReq = parsedCommand.makeRequest();
+            udp.sendCommand(newReq);
 
             history.addFirst(command[0]);
             if(history.size() > 14){

@@ -1,7 +1,5 @@
 package udpclient;
 
-import commands.interfaces.Command;
-
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutput;
@@ -16,8 +14,8 @@ public class UDPclient{
     private InetAddress IPAddress;
 
     // Создайте соответствующие буферы
-    byte[] sendingDataBuffer = new byte[1024];
-    byte[] receivingDataBuffer = new byte[1024];
+    private byte[] sendingDataBuffer = new byte[1024];
+    private byte[] receivingDataBuffer = new byte[1024];
 
     public UDPclient(){
         /* Создайте экземпляр клиентского сокета.
@@ -54,16 +52,8 @@ public class UDPclient{
             clientSocket.send(sendingPacket);
             System.out.println("file was sent");
 
-            // Получите ответ от сервера, т.е. предложение из заглавных букв
-            DatagramPacket receivingPacket = new DatagramPacket(receivingDataBuffer, receivingDataBuffer.length);
-            clientSocket.receive(receivingPacket);
-
-            // Выведите на экране полученные данные
-            String receivedData = new String(receivingPacket.getData());
-            System.out.println("Received from the server: " + receivedData);
-
-            // Закройте соединение с сервером через сокет
-            clientSocket.close();
+//            // Закройте соединение с сервером через сокет
+//            clientSocket.close();
         }
         catch(IOException e) {
             e.printStackTrace();

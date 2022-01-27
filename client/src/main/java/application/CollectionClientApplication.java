@@ -3,11 +3,11 @@ package application;
 import commands.CommandsManager;
 import services.IOutil;
 
-public class CollectionApplication {
+public class CollectionClientApplication {
     private IOutil io;
     private CommandsManager executor;
 
-    public CollectionApplication(){
+    public CollectionClientApplication(){
         io = new IOutil();
         executor = new CommandsManager(io);
     }

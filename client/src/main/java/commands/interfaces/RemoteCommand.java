@@ -1,7 +1,7 @@
 package commands.interfaces;
 
-import commands.interfaces.Command;
+import udpclient.Request;
 
 public interface RemoteCommand extends Command {
-    public void preSend();
+    public Request makeRequest();
 }

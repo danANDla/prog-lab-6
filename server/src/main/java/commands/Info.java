@@ -1,8 +1,9 @@
 package commands;
 
 import collection.utils.CollectionManager;
+import commands.interfaces.Command;
 
-public class Info implements Command{
+public class Info implements Command {
     CollectionManager collectionManager;
 
     public Info(CollectionManager collectionManager) {

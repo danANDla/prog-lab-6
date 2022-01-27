@@ -24,6 +24,7 @@ public class CollectionServerApplication {
         while(true){
             try{
                 Request recieved = udp.recieveRequest();
+                executor.executeRequest(recieved);
             } catch (Exception e){
                 io.printError("Exception while receiving package");
             }

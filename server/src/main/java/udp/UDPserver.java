@@ -61,8 +61,8 @@ public class UDPserver {
         System.out.println(received);
         buffer.clear();
 
+        return received;
 //        // Закройте соединение сокетов
 //        serverSocket.close();
-        return  null;
     }
 }

@@ -1,11 +1,13 @@
 package commands;
 
+import commands.interfaces.ArgumentedCommand;
+import commands.interfaces.Command;
 import services.IOutil;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class Help implements Command{
+public class Help implements Command {
     private HashMap<String, Command> commandsList;
     private HashMap<String, ArgumentedCommand> argumentedCommandsList;
     private IOutil io;

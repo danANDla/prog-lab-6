@@ -27,8 +27,7 @@ public class CollectionManager {
         creationDate = LocalDate.now();
     }
 
-    public void insertBand(){
-        MusicBand newBand = bandFactory.makeBand();
+    public void insertBand(MusicBand newBand){
         bandId+=1;
         if(idTaken(bandId) || (bandId > bandsList.size()*2)){
             bandId = findNewId(bandId);

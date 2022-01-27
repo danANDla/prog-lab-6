@@ -1,11 +1,12 @@
 package commands;
 
+import commands.interfaces.Command;
 import services.IOutil;
 
 import java.util.ArrayDeque;
 import java.util.Iterator;
 
-public class History implements Command{
+public class History implements Command {
     ArrayDeque<String> hist;
     IOutil io;
 

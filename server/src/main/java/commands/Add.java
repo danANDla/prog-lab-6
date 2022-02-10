@@ -23,7 +23,7 @@ public class Add implements ExtendedCommand {
     @Override
      public Response execute() {
         CommandStatus res = collecManager.insertBand(this.band);
-        return new Response("add", res.name());
+        return new Response("add", res.name(), null);
     }
 
     @Override

@@ -2,9 +2,7 @@ package udp;
 
 import services.IOutil;
 
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
+import java.io.*;
 import java.net.*;
 import java.nio.ByteBuffer;
 import java.nio.channels.DatagramChannel;
@@ -63,4 +61,24 @@ public class UDPserver {
 
         return received;
     }
+
+
+    public ByteArrayOutputStream serializeResp(Response newResp) throws IOException {
+        ByteArrayOutputStream bStream = new ByteArrayOutputStream();
+        ObjectOutput oo = new ObjectOutputStream(bStream);
+        oo.writeObject(newResp);
+        oo.close();
+        return bStream;
+    }
+
+//    public boolean sendReponse(Response resp){
+//        try{
+//            System.out.println("Sending response to client...");
+//            ByteBuffer sendingBuffer = ByteBuffer.wrap(serializeResp(resp).toByteArray());
+//            datagramChannel.send(sendingBuffer,);
+//        }
+//        catch (IOException e){
+//            e.printStackTrace();
+//        }
+//    }
 }

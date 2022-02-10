@@ -9,6 +9,7 @@ import services.IOutil;
 import udp.Request;
 import udp.UDPclient;
 
+import java.net.SocketAddress;
 import java.util.ArrayDeque;
 import java.util.HashMap;
 import java.util.Locale;
@@ -57,11 +58,12 @@ public class CommandsManager {
             }
         }
         else{
-            sendCommand(newCommand);
+            SocketAddress sender = udp.getAddress();
+            sendCommand(newCommand, sender);
         }
     }
 
-    private void sendCommand(String newCommand){
+    private void sendCommand(String newCommand, SocketAddress sender){
         String[] command = newCommand.trim().toLowerCase(Locale.ROOT).split("\\s+");
         if(argumentedComandsList.containsKey(command[0])){
             RemoteArgumentedCommand parsedCommand = argumentedComandsList.get(command[0]);
@@ -76,7 +78,7 @@ public class CommandsManager {
         else if(commandsList.containsKey(command[0])){
             RemoteCommand parsedCommand = commandsList.get(command[0]);
 
-            Request newReq = parsedCommand.makeRequest();
+            Request newReq = parsedCommand.makeRequest(sender);
             udp.sendCommand(newReq);
 
             history.addFirst(command[0]);

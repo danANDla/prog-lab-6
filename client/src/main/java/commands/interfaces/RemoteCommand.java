@@ -2,6 +2,8 @@ package commands.interfaces;
 
 import udp.Request;
 
+import java.net.SocketAddress;
+
 public interface RemoteCommand extends Command {
-    public Request makeRequest();
+    Request makeRequest(SocketAddress sender);
 }

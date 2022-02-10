@@ -64,4 +64,8 @@ public class UDPclient {
             e.printStackTrace();
         }
     }
+
+    public SocketAddress getAddress(){
+        return clientSocket.getLocalSocketAddress();
+    }
 }

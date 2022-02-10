@@ -248,17 +248,16 @@ public class CollectionManager {
         // todo groupByDescription
     }
 
-    public Response info(){
-        Response resp = new Response();
+    public String info(){
+        String msg;
         if(bandsList.isEmpty()){
-            resp.setMsg("Коллекция пуста");
+           msg = "Коллекция пуста";
         }
         else{
-            resp.setMsg("дата инициализации коллекции: " + creationDate + "\n" +
-                    "количество элементов в коллекции: " + bandsList.size());
+            msg = "дата инициализации коллекции: " + creationDate + "\n" +
+                    "количество элементов в коллекции: " + bandsList.size();
         }
-        resp.setCommand("info");
-        return resp;
+        return msg;
     }
 
     public void show(){

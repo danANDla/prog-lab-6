@@ -13,7 +13,11 @@ public class Info implements Command {
 
     @Override
     public Response execute() {
-        return collectionManager.info();
+        Response resp = new Response();
+        resp.setReceiver(null);
+        resp.setCommand("info");
+        resp.setMsg(collectionManager.info());
+        return resp;
     }
 
     @Override

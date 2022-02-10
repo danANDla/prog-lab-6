@@ -1,8 +1,12 @@
 package udp;
 
-public class Response {
+import java.io.Serializable;
+import java.net.SocketAddress;
+
+public class Response implements Serializable {
     String command;
     String msg;
+    SocketAddress receiver;
 
     public String getCommand() {
         return command;
@@ -20,9 +24,18 @@ public class Response {
         this.msg = msg;
     }
 
-    public Response(String command, String msg) {
+    public SocketAddress getReceiver() {
+        return receiver;
+    }
+
+    public void setReceiver(SocketAddress receiver) {
+        this.receiver = receiver;
+    }
+
+    public Response(String command, String msg, SocketAddress receiver) {
         this.command = command;
         this.msg = msg;
+        this.receiver = receiver;
     }
 
     public Response() {
@@ -33,6 +46,7 @@ public class Response {
         return "Response{" +
                 "command='" + command + '\'' +
                 ", msg='" + msg + '\'' +
+                ", receiver=" + receiver +
                 '}';
     }
 }

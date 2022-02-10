@@ -1,7 +1,10 @@
 package collection.music;
 
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 
+@XmlRootElement(name = "album")
 public class Album implements Serializable {
     private String name; //Поле не может быть null, Строка не может быть пустой
     private int tracks; //Значение поля должно быть больше 0
@@ -21,6 +24,7 @@ public class Album implements Serializable {
         return name;
     }
 
+    @XmlElement
     public void setName(String name) {
         this.name = name;
     }
@@ -29,6 +33,7 @@ public class Album implements Serializable {
         return tracks;
     }
 
+    @XmlElement
     public void setTracks(int tracks) {
         this.tracks = tracks;
     }
@@ -37,6 +42,7 @@ public class Album implements Serializable {
         return length;
     }
 
+    @XmlElement
     public void setLength(Integer length) {
         this.length = length;
     }
@@ -45,6 +51,7 @@ public class Album implements Serializable {
         return sales;
     }
 
+    @XmlElement
     public void setSales(double sales) {
         this.sales = sales;
     }

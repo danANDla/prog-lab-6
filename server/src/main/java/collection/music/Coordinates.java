@@ -1,7 +1,10 @@
 package collection.music;
 
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 
+@XmlRootElement(name = "coordinates")
 public class Coordinates implements Serializable {
     private Double x; //Поле не может быть null
     private Integer y; //Значение поля должно быть больше -620, Поле не может быть null
@@ -12,6 +15,7 @@ public class Coordinates implements Serializable {
         return x;
     }
 
+    @XmlElement(name = "coordinateX")
     public void setX(Double x) {
         this.x = x;
     }
@@ -20,6 +24,7 @@ public class Coordinates implements Serializable {
         return y;
     }
 
+    @XmlElement(name = "coordinateY")
     public void setY(Integer y) {
         this.y = y;
     }

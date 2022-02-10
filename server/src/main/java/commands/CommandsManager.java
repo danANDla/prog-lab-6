@@ -23,9 +23,9 @@ public class CommandsManager {
 
     ArrayDeque<String> history;
 
-    public CommandsManager(IOutil ioutil){
+    public CommandsManager(IOutil ioutil, CollectionManager manager){
         io = ioutil;
-        collectionManager = new CollectionManager(io);
+        collectionManager = manager;
         history = new ArrayDeque<String>();
         fillLists();
     }

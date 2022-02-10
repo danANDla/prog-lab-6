@@ -1,5 +1,6 @@
 package application;
 
+import collection.utils.CollectionManager;
 import udp.Request;
 import udp.Response;
 import udp.UDPserver;
@@ -8,16 +9,19 @@ import services.IOutil;
 
 public class CollectionServerApplication {
     private IOutil io;
-    private CommandsManager executor;
+    private CommandsManager commandsManager;
+    private CollectionManager collectionManager;
     private UDPserver udp;
 
     public CollectionServerApplication(){
         io = new IOutil();
-        executor = new CommandsManager(io);
+        collectionManager = new CollectionManager(io);
+        commandsManager = new CommandsManager(io, collectionManager);
         udp = new UDPserver(io);
     }
 
     public void start(){
+        collectionManager.readXML();
         listening();
     }
 
@@ -25,7 +29,7 @@ public class CollectionServerApplication {
         while(true){
             try{
                 Request recieved = udp.recieveRequest();
-                Response resp = executor.executeRequest(recieved);
+                Response resp = commandsManager.executeRequest(recieved);
                 udp.sendReponse(resp, recieved.getSender());
             } catch (Exception e){
                 io.printError("Exception while receiving package");

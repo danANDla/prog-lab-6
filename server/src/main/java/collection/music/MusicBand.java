@@ -2,9 +2,16 @@ package collection.music;
 
 import com.sun.xml.internal.ws.api.model.SEIModel;
 
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 import java.io.Serializable;
 import java.util.Date;
 
+@XmlRootElement(name = "band")
+@XmlType(propOrder = {"id", "name", "coordinates", "creationDate", "numberOfParticipants", "albumsCount", "description",
+        "genre", "bestAlbum"})
 public class MusicBand implements Serializable {
     private Integer id; //Поле не может быть null, Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
     private String name; //Поле не может быть null, Строка не может быть пустой
@@ -27,10 +34,14 @@ public class MusicBand implements Serializable {
         this.bestAlbum = bestAlbum;
     }
 
+    public MusicBand() {
+    }
+
     public Integer getId() {
         return id;
     }
 
+    @XmlAttribute
     public void setId(Integer id) {
         this.id = id;
     }
@@ -39,6 +50,7 @@ public class MusicBand implements Serializable {
         return name;
     }
 
+    @XmlElement
     public void setName(String name) {
         this.name = name;
     }
@@ -47,6 +59,7 @@ public class MusicBand implements Serializable {
         return coordinates;
     }
 
+    @XmlElement
     public void setCoordinates(Coordinates coordinates) {
         this.coordinates = coordinates;
     }
@@ -55,6 +68,7 @@ public class MusicBand implements Serializable {
         return creationDate;
     }
 
+    @XmlElement
     public void setCreationDate(Date creationDate) {
         this.creationDate = creationDate;
     }
@@ -63,6 +77,7 @@ public class MusicBand implements Serializable {
         return numberOfParticipants;
     }
 
+    @XmlElement
     public void setNumberOfParticipants(long numberOfParticipants) {
         this.numberOfParticipants = numberOfParticipants;
     }
@@ -71,6 +86,7 @@ public class MusicBand implements Serializable {
         return albumsCount;
     }
 
+    @XmlElement
     public void setAlbumsCount(int albumsCount) {
         this.albumsCount = albumsCount;
     }
@@ -79,6 +95,7 @@ public class MusicBand implements Serializable {
         return description;
     }
 
+    @XmlElement
     public void setDescription(String description) {
         this.description = description;
     }
@@ -87,6 +104,7 @@ public class MusicBand implements Serializable {
         return genre;
     }
 
+    @XmlElement
     public void setGenre(MusicGenre genre) {
         this.genre = genre;
     }
@@ -95,6 +113,7 @@ public class MusicBand implements Serializable {
         return bestAlbum;
     }
 
+    @XmlElement
     public void setBestAlbum(Album bestAlbum) {
         this.bestAlbum = bestAlbum;
     }

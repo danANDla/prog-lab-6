@@ -71,14 +71,14 @@ public class UDPserver {
         return bStream;
     }
 
-//    public boolean sendReponse(Response resp){
-//        try{
-//            System.out.println("Sending response to client...");
-//            ByteBuffer sendingBuffer = ByteBuffer.wrap(serializeResp(resp).toByteArray());
-//            datagramChannel.send(sendingBuffer,);
-//        }
-//        catch (IOException e){
-//            e.printStackTrace();
-//        }
-//    }
+    public void sendReponse(Response resp, SocketAddress receiver){
+        try{
+            System.out.println("Sending response to client...");
+            ByteBuffer sendingBuffer = ByteBuffer.wrap(serializeResp(resp).toByteArray());
+            datagramChannel.send(sendingBuffer, receiver);
+        }
+        catch (IOException e){
+            e.printStackTrace();
+        }
+    }
 }

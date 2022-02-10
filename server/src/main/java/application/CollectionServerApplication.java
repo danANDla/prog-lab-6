@@ -1,6 +1,7 @@
 package application;
 
 import udp.Request;
+import udp.Response;
 import udp.UDPserver;
 import commands.CommandsManager;
 import services.IOutil;
@@ -24,7 +25,8 @@ public class CollectionServerApplication {
         while(true){
             try{
                 Request recieved = udp.recieveRequest();
-                executor.executeRequest(recieved);
+                Response resp = executor.executeRequest(recieved);
+                udp.sendReponse(resp, recieved.getSender());
             } catch (Exception e){
                 io.printError("Exception while receiving package");
             }

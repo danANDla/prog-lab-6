@@ -41,7 +41,7 @@ public class CommandsManager {
         extendedCommandList.put("add", new Add(collectionManager));
     }
 
-    public void executeRequest(Request request){
+    public Response executeRequest(Request request){
         Response resp = null;
         String commandName = request.getCommand().toLowerCase(Locale.ROOT);
         if(extendedCommandList.containsKey(commandName)){
@@ -85,6 +85,6 @@ public class CommandsManager {
         else{
             io.printError("Такой команды не найдено");
         }
-        if(resp != null) System.out.println(resp);
+        return resp;
     }
 }

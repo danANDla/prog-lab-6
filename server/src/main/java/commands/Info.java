@@ -2,6 +2,7 @@ package commands;
 
 import collection.utils.CollectionManager;
 import commands.interfaces.Command;
+import udp.Response;
 
 public class Info implements Command {
     CollectionManager collectionManager;
@@ -11,8 +12,8 @@ public class Info implements Command {
     }
 
     @Override
-    public void execute() {
-        collectionManager.info();
+    public Response execute() {
+        return collectionManager.info();
     }
 
     @Override

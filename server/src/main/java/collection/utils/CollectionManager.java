@@ -4,8 +4,10 @@ import collection.music.Album;
 import collection.music.Coordinates;
 import collection.music.MusicBand;
 import collection.music.MusicGenre;
+import commands.CommandStatus;
 import exceptions.InvalidIdException;
 import services.IOutil;
+import udp.Response;
 
 import java.time.LocalDate;
 import java.util.Date;
@@ -27,13 +29,14 @@ public class CollectionManager {
         creationDate = LocalDate.now();
     }
 
-    public void insertBand(MusicBand newBand){
+    public CommandStatus insertBand(MusicBand newBand){
         bandId+=1;
         if(idTaken(bandId) || (bandId > bandsList.size()*2)){
             bandId = findNewId(bandId);
         }
         newBand.setId(bandId);
         bandsList.add(newBand);
+        return CommandStatus.OK;
     }
 
     public LinkedHashSet<MusicBand> getBandsList() {
@@ -245,14 +248,17 @@ public class CollectionManager {
         // todo groupByDescription
     }
 
-    public void info(){
+    public Response info(){
+        Response resp = new Response();
         if(bandsList.isEmpty()){
-            io.printError("Коллекция пуста");
+            resp.setMsg("Коллекция пуста");
         }
         else{
-            io.printText("дата инициализации коллекции: " + creationDate);
-            io.printText("количество элементов в коллекции: " + bandsList.size());
+            resp.setMsg("дата инициализации коллекции: " + creationDate + "\n" +
+                    "количество элементов в коллекции: " + bandsList.size());
         }
+        resp.setCommand("info");
+        return resp;
     }
 
     public void show(){

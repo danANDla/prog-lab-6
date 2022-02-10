@@ -62,7 +62,5 @@ public class UDPserver {
         buffer.clear();
 
         return received;
-//        // Закройте соединение сокетов
-//        serverSocket.close();
     }
 }

@@ -6,7 +6,7 @@ import java.io.ObjectOutput;
 import java.io.ObjectOutputStream;
 import java.net.*;
 
-public class UDPclient{
+public class UDPclient {
     /* Порт сервера, к которому собирается
     подключиться клиентский сокет */
     private final static int SERVICE_PORT = 50001;
@@ -17,19 +17,19 @@ public class UDPclient{
     private byte[] sendingDataBuffer = new byte[1024];
     private byte[] receivingDataBuffer = new byte[1024];
 
-    public UDPclient(){
+    public UDPclient() {
         /* Создайте экземпляр клиентского сокета.
         Нет необходимости в привязке к определенному порту */
-        try{
+        try {
             clientSocket = new DatagramSocket();
             // Получите IP-адрес сервера
             IPAddress = InetAddress.getByName("localhost");
-        } catch (SocketException | UnknownHostException e){
+        } catch (SocketException | UnknownHostException e) {
             System.out.println("Unable create client socket");
         }
     }
 
-    public ByteArrayOutputStream serializeReq(Request newReq) throws IOException{
+    public ByteArrayOutputStream serializeReq(Request newReq) throws IOException {
         ByteArrayOutputStream bStream = new ByteArrayOutputStream();
         ObjectOutput oo = new ObjectOutputStream(bStream);
         oo.writeObject(newReq);
@@ -38,11 +38,11 @@ public class UDPclient{
     }
 
     public void sendCommand(Request newReq) {
-        try{
+        try {
             /* Преобразуйте данные в байты
             и разместите в буферах */
             sendingDataBuffer = serializeReq(newReq).toByteArray();
-
+            receivingDataBuffer = new byte[1024];
 
             // Создайте UDP-пакет
             DatagramPacket sendingPacket = new DatagramPacket(sendingDataBuffer, sendingDataBuffer.length, IPAddress, SERVICE_PORT);
@@ -52,10 +52,15 @@ public class UDPclient{
             clientSocket.send(sendingPacket);
             System.out.println("file was sent");
 
-//            // Закройте соединение с сервером через сокет
-//            clientSocket.close();
-        }
-        catch(IOException e) {
+            // Получите ответ от сервера, т.е. предложение из заглавных букв
+            DatagramPacket receivingPacket = new DatagramPacket(receivingDataBuffer, receivingDataBuffer.length);
+            clientSocket.receive(receivingPacket);
+
+            // Выведите на экране полученные данные
+            String receivedData = new String(receivingPacket.getData());
+            System.out.println("Sent from the server: " + receivedData);
+
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }

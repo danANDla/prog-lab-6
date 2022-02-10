@@ -1,6 +1,8 @@
 package commands.interfaces;
 
+import udp.Response;
+
 public interface Command {
-    void execute();
+    Response execute();
     String getdescription();
 }

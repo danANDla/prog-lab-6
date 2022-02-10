@@ -4,6 +4,7 @@ import collection.music.MusicBand;
 import collection.utils.CollectionManager;
 import commands.interfaces.Command;
 import commands.interfaces.ExtendedCommand;
+import udp.Response;
 
 public class Add implements ExtendedCommand {
     private CollectionManager collecManager;
@@ -14,14 +15,15 @@ public class Add implements ExtendedCommand {
     }
 
     @Override
-    public void extendedExecute(MusicBand band) {
+    public Response extendedExecute(MusicBand band) {
         this.band = band;
-        execute();
+        return execute();
     }
 
     @Override
-    public void execute() {
-        collecManager.insertBand(band);
+     public Response execute() {
+        CommandStatus res = collecManager.insertBand(this.band);
+        return new Response("add", res.name());
     }
 
     @Override

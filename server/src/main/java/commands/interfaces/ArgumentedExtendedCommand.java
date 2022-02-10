@@ -1,7 +1,8 @@
 package commands.interfaces;
 
 import collection.music.MusicBand;
+import udp.Response;
 
 public interface ArgumentedExtendedCommand extends ArgumentedCommand{
-    public void extendedExecute(MusicBand band);
+    Response extendedExecute(MusicBand band);
 }

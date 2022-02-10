@@ -7,6 +7,7 @@ import commands.interfaces.ArgumentedExtendedCommand;
 import commands.interfaces.ExtendedCommand;
 import services.IOutil;
 import udp.Request;
+import udp.Response;
 
 import java.util.ArrayDeque;
 import java.util.HashMap;
@@ -26,7 +27,6 @@ public class CommandsManager {
         io = ioutil;
         collectionManager = new CollectionManager(io);
         history = new ArrayDeque<String>();
-
         fillLists();
     }
 
@@ -36,19 +36,17 @@ public class CommandsManager {
         extendedCommandList = new HashMap<String, ExtendedCommand>();
         argumentedExtendedCommandList = new HashMap<String, ArgumentedExtendedCommand>();
 
-        commandsList.put("exit", new Exit(io));
-        commandsList.put("help", new Help(commandsList, argumentedComandsList, io));
         commandsList.put("info", new Info(collectionManager));
-        commandsList.put("history", new History(history, io));
 
         extendedCommandList.put("add", new Add(collectionManager));
     }
 
     public void executeRequest(Request request){
+        Response resp = null;
         String commandName = request.getCommand().toLowerCase(Locale.ROOT);
         if(extendedCommandList.containsKey(commandName)){
             ExtendedCommand parsedCommand = extendedCommandList.get(commandName);
-            parsedCommand.extendedExecute(request.getMusicBand());
+            resp = parsedCommand.extendedExecute(request.getMusicBand());
 
             history.addFirst(commandName);
             if(history.size() > 14){
@@ -58,7 +56,7 @@ public class CommandsManager {
         else if(argumentedExtendedCommandList.containsKey(commandName)){
             ArgumentedExtendedCommand parsedCommand = argumentedExtendedCommandList.get(commandName);
             String[] commandArgs = request.getArgs().trim().toLowerCase(Locale.ROOT).split("\\s+");
-            if(parsedCommand.parseArgs(commandArgs)) parsedCommand.extendedExecute(request.getMusicBand());
+            if(parsedCommand.parseArgs(commandArgs)) resp = parsedCommand.extendedExecute(request.getMusicBand());
 
             history.addFirst(commandName);
             if(history.size() > 14){
@@ -68,7 +66,7 @@ public class CommandsManager {
         else if(argumentedComandsList.containsKey(commandName)){
             ArgumentedCommand parsedCommand = argumentedComandsList.get(commandName);
             String[] commandArgs = request.getArgs().trim().toLowerCase(Locale.ROOT).split("\\s+");
-            if (parsedCommand.parseArgs(commandArgs)) parsedCommand.execute();
+            if (parsedCommand.parseArgs(commandArgs)) resp = parsedCommand.execute();
 
             history.addFirst(commandName);
             if(history.size() > 14){
@@ -77,7 +75,7 @@ public class CommandsManager {
         }
         else if(commandsList.containsKey(commandName)){
             Command parsedCommand = commandsList.get(commandName);
-            parsedCommand.execute();
+            resp = parsedCommand.execute();
 
             history.addFirst(commandName);
             if(history.size() > 14){
@@ -87,5 +85,6 @@ public class CommandsManager {
         else{
             io.printError("Такой команды не найдено");
         }
+        if(resp != null) System.out.println(resp);
     }
 }
